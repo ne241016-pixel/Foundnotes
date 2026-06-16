@@ -1,49 +1,49 @@
 let imageData = "";
 
 
+// =========================
 // 記録画面を表示
+// =========================
 
 document
 .getElementById("startButton")
 .addEventListener("click", function(){
 
-
-document
-.getElementById("record")
-.classList
-.remove("hidden");
-
+    document
+    .getElementById("record")
+    .classList
+    .remove("hidden");
 
 });
 
 
 
-
-
+// =========================
 // 写真読み込み
+// =========================
 
 document
 .getElementById("image")
 .addEventListener("change", function(e){
 
+    let file = e.target.files[0];
 
-let file = e.target.files[0];
-
-
-let reader = new FileReader();
-
-
-
-reader.onload = function(){
-
-imageData = reader.result;
-
-};
+    if(!file){
+        return;
+    }
 
 
+    let reader = new FileReader();
 
-reader.readAsDataURL(file);
 
+    reader.onload = function(){
+
+        imageData = reader.result;
+
+    };
+
+
+    reader.readAsDataURL(file);
 
 
 });
@@ -51,78 +51,74 @@ reader.readAsDataURL(file);
 
 
 
-
-
-// 保存
+// =========================
+// 保存処理
+// =========================
 
 document
 .getElementById("saveButton")
 .addEventListener("click", function(){
 
 
-
-let feelings=[];
-
-
-document
-.querySelectorAll(
-'input[type="checkbox"]:checked'
-)
-.forEach(function(item){
+    let feelings = [];
 
 
-feelings.push(item.value);
+    document
+    .querySelectorAll(
+        'input[type="checkbox"]:checked'
+    )
+    .forEach(function(item){
 
+        feelings.push(item.value);
 
-});
+    });
 
 
 
-let note={
+    let note = {
+
+        image: imageData,
+
+        feeling: feelings,
+
+        comment:
+        document
+        .getElementById("comment")
+        .value,
 
 
-image:imageData,
+        date:
+        new Date()
+        .toLocaleDateString()
 
-
-feeling:feelings,
-
-
-comment:
-document
-.getElementById("comment")
-.value,
-
-
-date:
-new Date()
-.toLocaleDateString()
-
-
-};
+    };
 
 
 
-
-let notes =
-JSON.parse(
-localStorage.getItem("notes")
-)
-|| [];
-
-
-
-notes.push(note);
+    let notes =
+    JSON.parse(
+        localStorage.getItem("notes")
+    )
+    || [];
 
 
 
-localStorage.setItem(
-"notes",
-JSON.stringify(notes)
-);
+    notes.push(note);
 
 
 
-displayNotes();
+    localStorage.setItem(
+        "notes",
+        JSON.stringify(notes)
+    );
+
+
+
+    displayNotes();
+
+
+
+    alert("発見を保存しました");
 
 
 
@@ -131,70 +127,83 @@ displayNotes();
 
 
 
-
-
-
+// =========================
 // ノート表示
+// =========================
 
 function displayNotes(){
 
 
-let notes =
-JSON.parse(
-localStorage.getItem("notes")
-)
-|| [];
+    let notes =
+    JSON.parse(
+        localStorage.getItem("notes")
+    )
+    || [];
 
 
 
-let area =
-document.getElementById("notes");
+    let area =
+    document.getElementById("notes");
 
 
 
-area.innerHTML="";
+    area.innerHTML = "";
 
 
 
-notes.forEach(function(note){
+    notes.forEach(function(note){
 
 
-area.innerHTML += `
+        area.innerHTML += `
+
+        <div class="card">
 
 
-<div class="card">
+        ${
+        note.image
+        ?
+        `<img src="${note.image}">`
+        :
+        "写真なし"
+        }
 
 
-<img src="${note.image}">
+        <h3>
+        ${
+        note.feeling.length > 0
+        ?
+        note.feeling.join(" / ")
+        :
+        "気づき"
+        }
+        </h3>
 
 
-<h3>
-${note.feeling.join(" / ")}
-</h3>
+        <p>
+        ${note.comment}
+        </p>
 
 
-<p>
-${note.comment}
-</p>
+        <p>
+        ${note.date}
+        </p>
 
 
-<p>
-${note.date}
-</p>
+        </div>
 
 
-</div>
+        `;
 
 
-`;
-
-
-
-});
+    });
 
 
 }
 
 
+
+// =========================
+// ページ読み込み時に表示
+// =========================
 
 displayNotes();
