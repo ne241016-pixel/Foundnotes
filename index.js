@@ -1,3 +1,13 @@
+document
+.getElementById("startButton")
+.addEventListener("click", function(){
+
+document
+.getElementById("record")
+.classList.remove("hidden");
+
+});
+
 let imageData = "";
 
 
