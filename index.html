@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>植物発見ノート</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>🌱 植物発見ノート</h1>
+
+<p>
+あなたが感じた植物との出会いを残します
+</p>
+
+</header>
+
+
+
+<!-- トップ -->
+
+<section id="home">
+
+<h2>万葉植物園</h2>
+
+<p>
+植物の名前を知らなくても大丈夫です。<br>
+あなたが「気になった瞬間」を記録してください。
+</p>
+
+
+<button onclick="openRecord()">
+発見を記録する
+</button>
+
+
+</section>
+
+
+
+
+<!-- 記録 -->
+
+<section id="record" class="hidden">
+
+
+<h2>発見を記録</h2>
+
+
+
+<label>
+写真
+</label>
+
+<input 
+type="file"
+id="image"
+accept="image/*"
+capture="environment">
+
+
+
+<h3>なぜ気になりましたか？</h3>
+
+
+<label>
+<input type="checkbox" value="きれい">
+きれい
+</label>
+
+
+<label>
+<input type="checkbox" value="初めて気づいた">
+初めて気づいた
+</label>
+
+
+<label>
+<input type="checkbox" value="形がおもしろい">
+形がおもしろい
+</label>
+
+
+<label>
+<input type="checkbox" value="季節を感じた">
+季節を感じた
+</label>
+
+
+
+<textarea
+id="comment"
+placeholder="感じたことを書いてください">
+</textarea>
+
+
+
+<button onclick="saveNote()">
+保存する
+</button>
+
+
+</section>
+
+
+
+
+
+<!-- ノート -->
+
+<section>
+
+
+<h2>My 発見ノート</h2>
+
+
+<div id="notes">
+
+</div>
+
+
+</section>
+
+
+
+<script src="app.js"></script>
+
+
+</body>
+
+</html>
