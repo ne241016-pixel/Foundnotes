@@ -18,6 +18,7 @@ document
 
 
 
+
 // =========================
 // 写真読み込み
 // =========================
@@ -27,6 +28,7 @@ document
 .addEventListener("change", function(e){
 
     let file = e.target.files[0];
+
 
     if(!file){
         return;
@@ -69,7 +71,9 @@ document
     )
     .forEach(function(item){
 
+
         feelings.push(item.value);
+
 
     });
 
@@ -77,9 +81,12 @@ document
 
     let note = {
 
+
         image: imageData,
 
+
         feeling: feelings,
+
 
         comment:
         document
@@ -91,7 +98,9 @@ document
         new Date()
         .toLocaleDateString()
 
+
     };
+
 
 
 
@@ -151,10 +160,12 @@ function displayNotes(){
 
 
 
-    notes.forEach(function(note){
+    notes.forEach(function(note, index){
+
 
 
         area.innerHTML += `
+
 
         <div class="card">
 
@@ -168,7 +179,9 @@ function displayNotes(){
         }
 
 
+
         <h3>
+
         ${
         note.feeling.length > 0
         ?
@@ -176,7 +189,9 @@ function displayNotes(){
         :
         "気づき"
         }
+
         </h3>
+
 
 
         <p>
@@ -184,9 +199,19 @@ function displayNotes(){
         </p>
 
 
+
         <p>
         ${note.date}
         </p>
+
+
+
+        <button onclick="deleteNote(${index})">
+
+        削除する
+
+        </button>
+
 
 
         </div>
@@ -202,8 +227,60 @@ function displayNotes(){
 
 
 
+
+
 // =========================
-// ページ読み込み時に表示
+// 記録削除
+// =========================
+
+function deleteNote(index){
+
+
+
+    if(
+        !confirm(
+            "この発見を削除しますか？"
+        )
+    ){
+
+        return;
+
+    }
+
+
+
+
+    let notes =
+    JSON.parse(
+        localStorage.getItem("notes")
+    )
+    || [];
+
+
+
+    notes.splice(index, 1);
+
+
+
+    localStorage.setItem(
+        "notes",
+        JSON.stringify(notes)
+    );
+
+
+
+    displayNotes();
+
+
+
+}
+
+
+
+
+
+// =========================
+// ページ読み込み時
 // =========================
 
 displayNotes();
