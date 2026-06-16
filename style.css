@@ -1,7 +1,6 @@
 body{
 
-font-family:
-sans-serif;
+font-family:sans-serif;
 
 background:#f3f5ef;
 
@@ -12,13 +11,11 @@ padding:20px;
 }
 
 
-
 header{
 
 text-align:center;
 
 }
-
 
 
 section{
@@ -55,24 +52,29 @@ font-size:16px;
 
 
 
+input,
 textarea{
 
 width:100%;
 
+box-sizing:border-box;
+
+margin-top:10px;
+
+margin-bottom:15px;
+
+padding:12px;
+
+font-size:16px;
+
+}
+
+
+textarea{
+
 height:100px;
 
-margin-top:15px;
-
 }
-
-
-
-input[type="checkbox"]{
-
-margin:10px;
-
-}
-
 
 
 .hidden{
@@ -85,11 +87,11 @@ display:none;
 
 .card{
 
-margin-top:20px;
+background:#fafafa;
 
 padding:15px;
 
-background:#fafafa;
+margin-top:15px;
 
 border-radius:10px;
 
